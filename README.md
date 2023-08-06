@@ -1,2 +1,7 @@
 # sandox-SQL
-Sandbox for SQL projects
+
+In this repo, there will be my learning projects in C#.
+***  
+
+|# Projects | Topics                                                    |
+|------|:---------------------------------------------------------:|
