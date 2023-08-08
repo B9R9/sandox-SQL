@@ -1,0 +1,56 @@
+-- comment sur une ligne
+# comment sur une ligne
+/*
+Comment plusieurs ligne
+*/
+
+Bonne pratique
+CREATE DATABASE `test`; --> utiliser antipode pour naming
+
+USE `test`;
+SHOW TABLES; --< montre les différentes tables
+ou
+SHOW TABLES FROM `test`;
+
+CREATE TABLE `t_name`
+(
+	'id_user' INT,
+	`user_name` VARCHAR(65),
+	`user_birthday` DATE
+);
+Or
+CREATE TABLE IF NOT EXIST `t_name`
+(
+	Meme code au dessus
+);
+
+Type données: valable pour mysql pour autre consulter la documentation
+INT
+CHAR
+...
+Voir tableau
+
+Pour afficher toute la table
+	DESCRIBE `t_name`;
+	EXPLAIN `t_name`;
+
+Utiliser le type le plus adapté	possible
+
+ALTER TABLE `t_name`
+ADD `user_points` TINYINT(2) -- ajouter une colonne
+MODIFY `id_user` SMALLINT -- modifie type de la colonne 
+CHANGE `user_birthday` `user_birth` DATE -- change le nom de la colony
+DROP `user_points`; -- efface une colony
+
+
+EFFACE UNE TABLE
+DROP TABLE `t_name`;
+Or
+DROP TABLE IF EXIST `t_name`;
+
+Avant d effacer une table il faut effacer ses relations
+
+Afficher les details de la tables
+SHOW TABLE STATUS;
+or
+SHOW TABLE STATUS FROM `t_name`;

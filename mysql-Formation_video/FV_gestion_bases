@@ -1,0 +1,6 @@
+CREATE DATABASE <NAME>		|| Creer une base de donnée
+CREATE IF NOT EXIST <name> 	|| verfie if n existe pas deja 
+USE <name>			|| pour utiliser la base de donne
+DROP DATABASE <name>		|| supprimer la base donnée
+SHOW DATABASES			|| affiche les bases de donnée	
+

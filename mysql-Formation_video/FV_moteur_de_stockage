@@ -1,0 +1,33 @@
+Moteur transitionnel s assure que les requêtes fiables plus lent 
+Moteur non transactionnel plus rapide plus performant 
+
+En fonction de ce que vous voulez faire choisir le bon moteur
+
+
+MOTEUR PRINCIPAUX:
+MyISAM -< non transactionnel
+InnoDB -< transactionnel
+Memory -< enregistre en memoire vive pas de place sur l espace disque tous sur la ram
+
+$sql>SHOW ENGINES; -> Affiche  les différents engines
+
+Changer le moteur par défaut:
+$sql>SET Default_storage_engine = <enginename> -> permet de changer le moteur 
+
+
+MyISAM
+-> tres rapide en lecture, rapide en ecriture 
+-> efficace pour la recherche
+->bloque la table complet
+
+InnoDB:
+->beaucoup d ecriture
+->sécuriser les données
+->coherence entre les donnees(tables)
+->verrouille la ligne
+
+
+On evite de mélanger les moteurs.
+
+
+
