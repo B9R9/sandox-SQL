@@ -3,11 +3,11 @@
 + [Distinct](#distinct)                      
 + [Where](#where) 
 + [Like](#like)
-+ [IsNULL](#is)
++ [IsNULL](#is-null)
 + [Between](#between)
 + [And](#and)
 + [Or](#or)
-+ [Orderby](#order)
++ [Orderby](#order-by)
 + [Limit](#limit)
 + [Case](#case)
 
@@ -24,7 +24,7 @@ FROM <TABLE_NAME>
 SELECT column_name AS 'whatever'
 FROM <TABLE_NAME>
 ```
-[top](#table)
+[top](#table-content)
 ***
 # Distinct
 `DISTINCT` is used to return unique values in the output. It filters out all duplicate values in the specified column(s).
