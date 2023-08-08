@@ -1,37 +1,31 @@
-Select
-Previously, we learned that SELECT is used every time you want to query data from a database and * means all columns.
++ [Select](#select)                           
++ [Distinct](#distinct)                      
++ [Where](#where) 
++ [Like](#like)
++ [IsNULL](#isnull)
++ [Between](#between)
++ [And](#and)
++ [Or](#or)
++ [Orderby](#orderby)
++ [Limit](#limit)
++ [Case](#case)
 
-Suppose we are only interested in two of the columns. We can select individual columns by their names (separated by a comma):
-
-SELECT column1, column2 
-FROM table_name;
- 
-To make it easier to read, we moved FROM to another line.
-
-Line breaks don’t mean anything specific in SQL. We could write this entire query in one line, and it would run just fine.
-
-
-As
-Knowing how SELECT works, suppose we have the code below:
-
-SELECT name AS 'Titles'
-FROM movies;
- 
-Can you guess what AS does?
-
-AS is a keyword in SQL that allows you to rename a column or table using an alias. The new name can be anything you want as long as you put it inside of single quotes. Here we renamed the name column as Titles.
-
-Some important things to note:
-
-Although it’s not always necessary, it is considered best practice to surround your aliases with single quotes.
-Note that this practice is specific to SQLite, the RDBMS used in this exercise. When you work with other RDBMSs, notably PostgreSQL, no quotes or double quotes may be required in place of single quotes.
-When using AS, the columns are not being renamed in the table. The aliases only appear in the result.
-
-
-Distinct
-When we are examining data in a table, it can be helpful to know what distinct values exist in a particular column.
-
-DISTINCT is used to return unique values in the output. It filters out all duplicate values in the specified column(s).
+***
+# SELECT
+`SELECT` is used every time you want to query data from a database. And `*` means all columns.  
+If you are interested in two of the columns. You can use:
+```
+SELECT column 1, column2
+FROM <TABLE_NAME>
+``` 
+`AS` is a keyword in SQL that allows you to rename a column or table using an alias. The new name can be anything you want as long as you put it inside of single quotes. 
+```
+SELECT column_name AS 'whatever'
+FROM <TABLE_NAME>
+```
+***
+# Distinct
+`DISTINCT` is used to return unique values in the output. It filters out all duplicate values in the specified column(s).
 
 For instance,
 
@@ -58,10 +52,8 @@ Hammer
 Nails
 
 Filtering the results of a query is an important skill in SQL. It is easier to see the different possible genres in the movie table after the data has been filtered than to scan every row in the table.
-
-
-
-Where
+***
+# Where
 We can restrict our query results using the WHERE clause in order to obtain only the information we want.
 
 Following this format, the statement below filters the result set to only include top rated movies (IMDb ratings greater than 8):
@@ -88,8 +80,8 @@ Comparison operators used with the WHERE clause are:
 <= less than or equal to
 There are also some special operators that we will learn more about in the upcoming exercises.
 
-
-Like I
+***
+# Like
 LIKE can be a useful operator when you want to compare similar values.
 
 The movies table contains two films with similar titles, ‘Se7en’ and ‘Seven’.
@@ -131,8 +123,8 @@ Here, any movie that contains the word ‘man’ in its name will be returned in
 
 LIKE is not case sensitive. ‘Batman’ and ‘Man of Steel’ will both appear in the result of the query above.
 
-
-Is Null
+***
+# Is Null
 By this point of the lesson, you might have noticed that there are a few missing values in the movies table. More often than not, the data you encounter will have missing values.
 
 Unknown values are indicated by NULL.
@@ -148,8 +140,9 @@ To filter for all movies with an IMDb rating:
 SELECT name
 FROM movies 
 WHERE imdb_rating IS NOT NULL;
- 
-Between
+
+***
+# Between
 The BETWEEN operator is used in a WHERE clause to filter the result set within a certain range. It accepts two values that are either numbers, text or dates.
 
 For example, this statement filters the result set to only include movies with years from 1990 up to, and including 1999.
@@ -167,9 +160,8 @@ FROM movies
 WHERE name BETWEEN 'A' AND 'J';
  
 However, if a movie has a name of simply ‘J’, it would actually match. This is because BETWEEN goes up to the second value — up to ‘J’. So the movie named ‘J’ would be included in the result set but not ‘Jaws’.
-
-
-And
+***
+# And
 Sometimes we want to combine multiple conditions in a WHERE clause to make the result set more specific and useful.
 
 One way of doing this is to use the AND operator. Here, we use the AND operator to only return 90’s romance movies.
@@ -188,9 +180,8 @@ AND combines the two conditions.
 AND Venn Diagram
 
 With AND, both conditions must be true for the row to be included in the result.
-
-
-Or
+***
+# Or
 Similar to AND, the OR operator can also be used to combine multiple conditions in WHERE, but there is a fundamental difference:
 
 AND operator displays a row if all the conditions are true.
@@ -212,7 +203,8 @@ OR Venn Diagram
 
 With OR, if any of the conditions are true, then the row is added to the result.
 
-Order By
+***
+# Order By
 That’s it with WHERE and its operators. Moving on!
 
 It is often useful to list the data in our result set in a particular order.
@@ -243,9 +235,8 @@ ASC is a keyword used in ORDER BY to sort the results in ascending order (low to
 The column that we ORDER BY doesn’t even have to be one of the columns that we’re displaying.
 
 Note: ORDER BY always goes after WHERE (if WHERE is present).
-
-
-Limit
+***
+# Limit
 We’ve been working with a fairly small table (fewer than 250 rows), but most SQL tables contain hundreds of thousands of records. In those situations, it becomes important to cap the number of rows in the result.
 
 For instance, imagine that we just want to see a few examples of records.
@@ -265,9 +256,8 @@ Instructions
 Combining your knowledge of LIMIT and ORDER BY, write a query that returns the top 3 highest rated movies.
 
 Select all the columns.
-
-
-Case
+***
+# Case
 A CASE statement allows us to create different outputs (usually in the SELECT statement). It is SQL’s way of handling if-then logic.
 
 Suppose we want to condense the ratings in movies to three levels:
