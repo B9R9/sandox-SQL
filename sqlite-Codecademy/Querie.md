@@ -1,3 +1,4 @@
+# Table content
 + [Select](#select)                           
 + [Distinct](#distinct)                      
 + [Where](#where) 
@@ -23,6 +24,7 @@ FROM <TABLE_NAME>
 SELECT column_name AS 'whatever'
 FROM <TABLE_NAME>
 ```
+[top](#tablecontent)
 ***
 # Distinct
 `DISTINCT` is used to return unique values in the output. It filters out all duplicate values in the specified column(s).
