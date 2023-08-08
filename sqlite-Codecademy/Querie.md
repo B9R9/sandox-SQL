@@ -28,103 +28,69 @@ FROM <TABLE_NAME>
 ***
 # Distinct
 `DISTINCT` is used to return unique values in the output. It filters out all duplicate values in the specified column(s).
-
-For instance,
-
-SELECT tools 
+```
+SELECT fruits
 FROM inventory;
- 
-might produce:
-
-tools
-Hammer
-Nails
-Nails
-Nails
-
-By adding DISTINCT before the column name,
-
-SELECT DISTINCT tools 
+```
+OUTPUT
+```
+banana
+water melon
+apple
+apple
+apple
+```
+If you add `DISTINCT` before the column name
+```
+SELECT DISTINCT fruits
 FROM inventory;
- 
-the result would now be:
-
-tools
-Hammer
-Nails
-
-Filtering the results of a query is an important skill in SQL. It is easier to see the different possible genres in the movie table after the data has been filtered than to scan every row in the table.
+```
+OUTPUT
+```
+banana
+water melon
+apple
+```
+[top](#introduction)
 ***
 # Where
-We can restrict our query results using the WHERE clause in order to obtain only the information we want.
-
-Following this format, the statement below filters the result set to only include top rated movies (IMDb ratings greater than 8):
-
+We can restrict our query results using the `WHERE` clause in order to obtain only the information we want.
+```
 SELECT *
 FROM movies
-WHERE imdb_rating > 8;
- 
-How does it work?
-
-The WHERE clause filters the result set to only include rows where the following condition is true.
-
-imdb_rating > 8 is the condition. Here, only rows with a value greater than 8 in the imdb_rating column will be returned.
-
-The > is an operator. Operators create a condition that can be evaluated as either true or false.
-
-Comparison operators used with the WHERE clause are:
-
-= equal to
-!= not equal to
-> greater than
-< less than
->= greater than or equal to
-<= less than or equal to
-There are also some special operators that we will learn more about in the upcoming exercises.
-
+WHERE rating > 8;
+```
+The `WHERE` clause filters the result set to only include rows where the following condition is true.
+`rating > 8` is the condition. Only rows with a value greater than 8 in the rating column will be returned.
+Comparison operators used with the `WHERE` clause are:
+ + `=` equal to
+ + `!=` not equal to
+ + `>` greater than
+ + `<` less than
+ + `>=` greater than or equal to
+ + `<=` less than or equal to
+   
+[top](#introduction)
 ***
 # Like
 LIKE can be a useful operator when you want to compare similar values.
-
-The movies table contains two films with similar titles, ‘Se7en’ and ‘Seven’.
-
-How could we select all movies that start with ‘Se’ and end with ‘en’ and have exactly one character in the middle?
-
+```
 SELECT * 
 FROM movies
 WHERE name LIKE 'Se_en';
- 
-LIKE is a special operator used with the WHERE clause to search for a specific pattern in a column.
+```
+`LIKE` is a special operator used with the `WHERE` clause to search for a specific pattern in a column. 
+`_` represents a wildcard character.
+The `_` means you can substitute any individual character here without breaking the pattern. The names Seven and Se7en both match this pattern.  
 
-name LIKE 'Se_en' is a condition evaluating the name column for a specific pattern.
+  
+`%` is another wildcard character that can be used with `LIKE`  
+`A%` matches all movies with names that begin with the letter ‘A’  
+`%a` matches all movies that end with ‘a’  
+`%man%`matches all movies that contain the word 'man'  
+`LIKE` is not case-sensitive. ‘Batman’ and ‘Man of Steel’ will both appear in the result of the query above.  
 
-Se_en represents a pattern with a wildcard character.
-
-The _ means you can substitute any individual character here without breaking the pattern. The names Seven and Se7en both match this pattern.
-
-
-The percentage sign % is another wildcard character that can be used with LIKE.
-
-This statement below filters the result set to only include movies with names that begin with the letter ‘A’:
-
-SELECT * 
-FROM movies
-WHERE name LIKE 'A%';
- 
-% is a wildcard character that matches zero or more missing letters in the pattern. For example:
-
-A% matches all movies with names that begin with letter ‘A’
-%a matches all movies that end with ‘a’
-We can also use % both before and after a pattern:
-
-SELECT * 
-FROM movies 
-WHERE name LIKE '%man%';
- 
-Here, any movie that contains the word ‘man’ in its name will be returned in the result.
-
-LIKE is not case sensitive. ‘Batman’ and ‘Man of Steel’ will both appear in the result of the query above.
-
+  [top](#introduction)
 ***
 # Is Null
 By this point of the lesson, you might have noticed that there are a few missing values in the movies table. More often than not, the data you encounter will have missing values.
