@@ -93,116 +93,87 @@ The `_` means you can substitute any individual character here without breaking 
   [top](#introduction)
 ***
 # Is Null
-By this point of the lesson, you might have noticed that there are a few missing values in the movies table. More often than not, the data you encounter will have missing values.
-
-Unknown values are indicated by NULL.
-
-It is not possible to test for NULL values with comparison operators, such as = and !=.
-
+Unknown values are indicated by `NULL`.  
+It is not possible to test for NULL values with comparison operators, such as `=` and `!=`.  
 Instead, we will have to use these operators:
-
+```
 IS NULL
 IS NOT NULL
-To filter for all movies with an IMDb rating:
-
+```
+```
 SELECT name
 FROM movies 
-WHERE imdb_rating IS NOT NULL;
+WHERE rating IS NOT NULL;
+```
+
+  [top](#introduction)
 
 ***
 # Between
-The BETWEEN operator is used in a WHERE clause to filter the result set within a certain range. It accepts two values that are either numbers, text or dates.
-
-For example, this statement filters the result set to only include movies with years from 1990 up to, and including 1999.
-
+The `BETWEEN` operator is used in a `WHERE` clause to filter the result set within a certain range. It accepts two values that are either numbers, text or dates.  
+```
 SELECT *
 FROM movies
 WHERE year BETWEEN 1990 AND 1999;
- 
-When the values are text, BETWEEN filters the result set for within the alphabetical range.
-
-In this statement, BETWEEN filters the result set to only include movies with names that begin with the letter ‘A’ up to, but not including ones that begin with ‘J’.
-
+```
+ When the values are text, BETWEEN filters the result set within the alphabetical range.  
+In this statement, BETWEEN filters the result set to only include movies with names that begin with the letter ‘A’ up to, but not including ones that start with ‘J’.
+```
 SELECT *
 FROM movies
 WHERE name BETWEEN 'A' AND 'J';
- 
-However, if a movie has a name of simply ‘J’, it would actually match. This is because BETWEEN goes up to the second value — up to ‘J’. So the movie named ‘J’ would be included in the result set but not ‘Jaws’.
+```
+If a movie has a name of simply ‘J’, it would actually match. This is because `BETWEEN` goes up to the second value — up to ‘J’. So the movie named ‘J’ would be included in the result set but not ‘Jaws’.  
+
+ [top](#introduction)
 ***
 # And
-Sometimes we want to combine multiple conditions in a WHERE clause to make the result set more specific and useful.
-
-One way of doing this is to use the AND operator. Here, we use the AND operator to only return 90’s romance movies.
-
+When you want to combine multiple conditions in a `WHERE` clause to make the result set more specific and useful.
+We use the `AND` operator.
+```
 SELECT * 
 FROM movies
 WHERE year BETWEEN 1990 AND 1999
    AND genre = 'romance';
- 
-year BETWEEN 1990 AND 1999 is the 1st condition.
+```
+Both conditions must be true for the row to be included in the result.  
+[top](#introduction)  
 
-genre = 'romance' is the 2nd condition.
-
-AND combines the two conditions.
-
-AND Venn Diagram
-
-With AND, both conditions must be true for the row to be included in the result.
 ***
 # Or
-Similar to AND, the OR operator can also be used to combine multiple conditions in WHERE, but there is a fundamental difference:
-
-AND operator displays a row if all the conditions are true.
-OR operator displays a row if any condition is true.
-Suppose we want to check out a new movie or something action-packed:
-
+The `OR` operator can be used to combine multiple conditions in `WHERE`, but there is a fundamental difference:  
+`AND` operator displays a row if all the conditions are true.  
+`OR` operator displays a row if any condition is true.  
+```
 SELECT *
 FROM movies
-WHERE year > 2014
-   OR genre = 'action';
- 
-year > 2014 is the 1st condition.
-
-genre = 'action' is the 2nd condition.
-
-OR combines the two conditions.
-
-OR Venn Diagram
-
-With OR, if any of the conditions are true, then the row is added to the result.
+WHERE year > 2014 -- 1st condition
+   OR genre = 'action'; -- 2nd condition
+``` 
+With OR, if any of the conditions are true, then the row is added to the result.  
+[top](#introduction)
 
 ***
 # Order By
-That’s it with WHERE and its operators. Moving on!
-
-It is often useful to list the data in our result set in a particular order.
-
-We can sort the results using ORDER BY, either alphabetically or numerically. Sorting the results often makes the data more useful and easier to analyze.
-
+We can sort the results using `ORDER BY`. `ORDER BY` is a clause that indicates you want to sort the result set by a particular column.
 For example, if we want to sort everything by the movie’s title from A through Z:
-
+```
 SELECT *
 FROM movies
 ORDER BY name;
- 
-ORDER BY is a clause that indicates you want to sort the result set by a particular column.
-
-name is the specified column.
-
-Sometimes we want to sort things in a decreasing order. For example, if we want to select all of the well-received movies, sorted from highest to lowest by their year:
-
+```
+`DESC` is a keyword used in ORDER BY to sort the results in descending order (high to low or Z-A).
+```
 SELECT *
 FROM movies
-WHERE imdb_rating > 8
+WHERE rating > 8
 ORDER BY year DESC;
- 
-DESC is a keyword used in ORDER BY to sort the results in descending order (high to low or Z-A).
+```
+`ASC` is a keyword used in ORDER BY to sort the results in ascending order (low to high or A-Z).  
+`ORDER BY` always goes after `WHERE` (if `WHERE` is present).  
+The column that we `ORDER BY` doesn’t have to be one of the columns that we’re displaying.  
+[top](#introduction)  
 
-ASC is a keyword used in ORDER BY to sort the results in ascending order (low to high or A-Z).
-
-The column that we ORDER BY doesn’t even have to be one of the columns that we’re displaying.
-
-Note: ORDER BY always goes after WHERE (if WHERE is present).
 ***
 # Limit
 We’ve been working with a fairly small table (fewer than 250 rows), but most SQL tables contain hundreds of thousands of records. In those situations, it becomes important to cap the number of rows in the result.
