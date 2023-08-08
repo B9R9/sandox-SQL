@@ -1,7 +1,9 @@
 # sandox-SQL
 
-In this repo, there will be my learning projects in C#.
-***  
+I used 2 tutorials to learn database management. One uses sqlite (made with Codecademy) and the other MySQL (Formatio video).
+***
 
-|# Projects | Topics                                                    |
+<h1 align='center'> Sqlite</h1>
+
+|# Projects | Topics                                               | 
 |------|:---------------------------------------------------------:|
