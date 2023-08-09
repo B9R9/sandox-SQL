@@ -11,6 +11,7 @@ I used 2 tutorials to learn database management. One uses sqlite (made with Code
 
 |# Projects | Topics                                               | 
 |------|:---------------------------------------------------------:|
+|[Querie](./sqlite-Codecademy/01-Querie.md)| Querie |
 
 ## More resources
 + https://www.codecademy.com/learn/learn-sql/modules/learn-sql-manipulation/cheatsheet
