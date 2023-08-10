@@ -5,6 +5,8 @@
 + [Create Table](#create-table)
 + [Insertt](#insert)
 + [Select](#select)
++ [Alter Table](#alter-table)
++ [Update](#update)
 
 ***
 # Statement & Definition  
@@ -60,52 +62,39 @@ VALUES (1, 'Bob Dylan', 22);
 ```
 SELECT name FROM class;
 ```
-
-
-1. SELECT is a clause that indicates that the statement is a query. You will use SELECT every time you query data from a database.
-2. name specifies the column to query data from.
-3. FROM celebs specifies the name of the table to query data from. In this statement, data is queried from the celebs table.
-
-You can also query data from all columns in a table with SELECT.
-
+You can also query data from all columns in a table with SELECT.  
+```
 SELECT * FROM celebs;
- 
-* is a special wildcard character that we have been using. It allows you to select every column in a table without having to name each one individually. Here, the result set contains every column in the celebs table.
+``` 
+`*` is a special wildcard character. It allows you to select every column in a table without having to name each one individually.  
+`SELECT` statements always return a new table called the result set.  
 
-SELECT statements always return a new table called the result set.
+[top](#introduction)
+***
+# Alter Table
+`ALTER TABLE` statement adds a new column to a table. You can use this command when you want to add columns to a table.  
+```
+ALTER TABLE class 
+ADD COLUMN teacher TEXT;
+```
+`TEXT` is the data type for the new column.  
+`NULL` is a special value in SQL that represents missing or unknown data. The rows that existed before the column was added have `NULL` `∅` values for teacher.
 
-
-Alter
-The ALTER TABLE statement adds a new column to a table. You can use this command when you want to add columns to a table. The statement below adds a new column twitter_handle to the celebs table.
-
-ALTER TABLE celebs 
-ADD COLUMN twitter_handle TEXT;
- 
-1. ALTER TABLE is a clause that lets you make the specified changes.
-2. celebs is the name of the table that is being changed.
-3. ADD COLUMN is a clause that lets you add a new column to a table:
-
-twitter_handle is the name of the new column being added
-TEXT is the data type for the new column
-4. NULL is a special value in SQL that represents missing or unknown data. Here, the rows that existed before the column was added have NULL (∅) values for twitter_handle.
-
-Update
-The UPDATE statement edits a row in a table. You can use the UPDATE statement when you want to change existing records. The statement below updates the record with an id value of 4 to have the twitter_handle @taylorswift13.
-
-UPDATE celebs 
-SET twitter_handle = '@taylorswift13' 
+[top](#introduction)  
+***
+# Update
+`UPDATE` statement edits a row in a table. You can use the `UPDATE` statement when you want to change existing records.  
+```
+UPDATE class 
+SET age = 24 
 WHERE id = 4; 
- 
-1. UPDATE is a clause that edits a row in the table.
-2. celebs is the name of the table.
-3. SET is a clause that indicates the column to edit.
+```
+`SET` is a clause that indicates the column to edit.  
+`WHERE` is a clause that indicates which row(s) to update with the new column value.  
 
-twitter_handle is the name of the column that is going to be updated
-@taylorswift13 is the new value that is going to be inserted into the twitter_handle column.
-4. WHERE is a clause that indicates which row(s) to update with the new column value. Here the row with a 4 in the id column is the row that will have the twitter_handle updated to @taylorswift13.
-
-
-Delete
+[top](#introduction)  
+***
+# Delete
 The DELETE FROM statement deletes one or more rows from a table. You can use the statement when you want to delete existing records. The statement below deletes all records in the celebs table with no twitter_handle:
 
 DELETE FROM celebs 
