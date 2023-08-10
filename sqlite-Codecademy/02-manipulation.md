@@ -1,62 +1,67 @@
 
+# Introduction
 
-The code below is a SQL statement. A statement is text that the database recognizes as a valid command. Statements always end in a semicolon ;.
++ [Statement](#statement-&-definition)
++ [Create Table](#create-table)
++ [Insertt](#insert)
++ [Select](#select)
 
+***
+# Statement & Definition  
+The code below is a SQL statement. A statement is a text that the database recognizes as a valid command. Statements always end in a semicolon `;`.
+```
 CREATE TABLE table_name (
    column_1 data_type, 
    column_2 data_type, 
    column_3 data_type
 );
- 
-Let’s break down the components of a statement:
+```
+The structure of SQL statements varies. The number of lines used does not matter. A statement can be written all on one line, or split up across multiple lines if it makes it easier to read. In this course, you will become familiar with the structure of common statements.  
 
-CREATE TABLE is a clause. Clauses perform specific tasks in SQL. By convention, clauses are written in capital letters. Clauses can also be referred to as commands.
-table_name refers to the name of the table that the command is applied to.
-(column_1 data_type, column_2 data_type, column_3 data_type) is a parameter. A parameter is a list of columns, data types, or values that are passed to a clause as an argument. Here, the parameter is a list of column names and the associated data type.
-The structure of SQL statements vary. The number of lines used does not matter. A statement can be written all on one line, or split up across multiple lines if it makes it easier to read. In this course, you will become familiar with the structure of common statements.
+CLAUSES: perform specific tasks in SQL. By convention, clauses are written in capital letters. Clauses can also be referred to as commands. 
+PARAMETER: A parameter is a list of columns, data types, or values that are passed to a clause as an argument.  
+DATA TYPE: An attribute that specifies the type of data that the object can hold: integer data, character data, monetary data, date and time data, binary strings, and so on.  
 
-
-Create
-CREATE statements allow us to create a new table in the database. You can use the CREATE statement anytime you want to create a new table from scratch. The statement below creates a new table named celebs.
-
-CREATE TABLE celebs (
-   id INTEGER, 
-   name TEXT, 
-   age INTEGER
+[top](#introduction)
+***
+# Create Table   
+```
+CREATE TABLE table_name (
+   column_1 data_type, 
+   column_2 data_type, 
+   column_3 data_type
 );
- 
-1. CREATE TABLE is a clause that tells SQL you want to create a new table.
-2. celebs is the name of the table.
-3. (id INTEGER, name TEXT, age INTEGER) is a list of parameters defining each column, or attribute in the table and its data type:
+```
+`CREATE TABLE` is a clause.  
+`table_name` refers to the name of the table that the command is applied to.  
+`(column_1 data_type, column_2 data_type, column_3 data_type)` is a list of parameters associated with their data type.
+`CREATE` statements allow us to create a new table in the database. You can use the `CREATE` statement anytime you want to create a new table from scratch.  
 
-id is the first column in the table. It stores values of data type INTEGER
-name is the second column in the table. It stores values of data type TEXT
-age is the third column in the table. It stores values of data type INTEGER
+[top](#introduction)  
+***  
+# INSERT
+The `INSERT` statement inserts a new row into a table.
+```
+INSERT INTO class (id, name, age ) 
+VALUES (1, 'Bob Dylan', 22);
+```
+`INSERT INTO` is a clause that adds the specified row or rows. "class" is the table the row is added to.  
+`(id, name, age)` is a parameter identifying the columns that data will be inserted into.  
+`VALUES` is a clause that indicates the data being inserted.  
+"(1, 'Bob Dylan', 22)" is a parameter identifying the values being inserted.
+   + 1:             an integer that will be added to id column
+   + "Bob Dylan":   text that will be added to name column
+   + 22:            an integer that will be added to age column
+
+[top](#introduction)
+***
+# Select
+`SELECT` statements are used to fetch data from a database. In the statement below, `SELECT` returns all data in the name column of the class table.  
+```
+SELECT name FROM class;
+```
 
 
-Insert
-The INSERT statement inserts a new row into a table.
-
-We can use the INSERT statement when you want to add new records. The statement below enters a record for Justin Bieber into the celebs table.
-
-INSERT INTO celebs (id, name, age) 
-VALUES (1, 'Justin Bieber', 22);
- 
-INSERT INTO is a clause that adds the specified row or rows.
-celebs is the table the row is added to.
-(id, name, age) is a parameter identifying the columns that data will be inserted into.
-VALUES is a clause that indicates the data being inserted.
-(1, 'Justin Bieber', 22) is a parameter identifying the values being inserted.
-1: an integer that will be added to id column
-'Justin Bieber': text that will be added to name column
-22: an integer that will be added to age column
-
-
-Select
-SELECT statements are used to fetch data from a database. In the statement below, SELECT returns all data in the name column of the celebs table.
-
-SELECT name FROM celebs;
- 
 1. SELECT is a clause that indicates that the statement is a query. You will use SELECT every time you query data from a database.
 2. name specifies the column to query data from.
 3. FROM celebs specifies the name of the table to query data from. In this statement, data is queried from the celebs table.
