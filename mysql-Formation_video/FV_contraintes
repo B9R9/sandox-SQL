@@ -1,0 +1,196 @@
+Les contraintes 
+
+Not NULL -> donnée nécessaire(obligatoire)
+	
+
+
+CREATE DATABASE IF NOT EXIST `MySQL CLASS`;
+USE `MySQL CLASS`;
+
+CREATE TABLE IF NOT EXIST `table_user`;
+(
+	`id_user`SMALLINT(6) NOT NULL,
+	`user_name` VARCHAR(30),
+	`user_mail` VARCHAR(100) NOT NULL,
+	`user_registration` DATE NOT NULL,
+	`user_admin`BOOLEAN
+)
+ENGINE = MyISAM
+CHARACTER SET ute8mb4
+COLLATE utf8mb4_unicode_ci;
+
+
+--> Ajoute une contrainte sur une table deja existante
+
+ALTER TABLE `table_user`
+MODIFY `user_name` VARCHAR(30) NOT NULL;
+
+
+---------
+
+DEFAULT --> valeur par default
+CREATE TABLE IF NOT EXIST `table_user`;
+(
+	`id_user`SMALLINT(6) NOT NULL,
+	`user_name` VARCHAR(30),
+	`user_mail` VARCHAR(100) NOT NULL,
+	`user_registration` DATE NOT NULL,
+	`user_admin`BOOLEAN DEFAULT 0
+);
+
+
+--> modifie une table
+ALTER TABLE `table_user`
+ALTER `user_admin` SET DEFAULT 0;
+
+-->supprimer
+ALTER TBALE `table_user` DROP DEFAULT;
+
+------
+
+CHECK --> verification d une valeur
+CREATE TABLE IF NOT EXIST `table_user`;
+(
+	`id_user`SMALLINT(6) CHECK(id_user <= 1000),
+	`user_name` VARCHAR(30),
+	`user_mail` VARCHAR(100),
+	`user_registration` DATE,
+	`user_admin`BOOLEAN 
+);
+
+ALTER TABLE `table_user`
+ADD CHECK(id_user <= 1000);
+
+-->nommer la contrainte
+ALTER TABLE `table_user`
+ADD CONSTRAINT CHK_idtoobig CHECK(id_user <= 1000 AND id_admin > 1);
+
+-->SUPPRIME
+ALTER TABLE `table_user`
+DROP CHK_idtoobig;
+
+-------------------------
+
+UNIQUE
+--> valeur du champ unique
+CREATE TABLE IF NOT EXIST `table_user`;
+(
+	`id_user`SMALLINT(6) CHECK(id_user <= 1000),
+	`user_name` VARCHAR(30),
+	`user_mail` VARCHAR(100),
+	`user_registration` DATE,
+	`user_admin`BOOLEAN,
+	
+	UNIQUE (`user_name`)
+
+);
+
+--> ADD UNIQUE
+ALTER TABLE `table_user`
+ADD UNIQUE(`user_name`);
+
+
+ALTER TABLE `table_user`
+ADD CONSTRAINT UC_userid UNIQUE(`id_user`, `user_name`);
+
+ALTER TABLE `table_user`
+DROP INDEX UC_userid;
+
+-------
+PRIMARY KEY
+-->clé primaire pareil que UNIQUE MAIS EN PLUS FORT une seule clé peut être définie ? <
+
+CREATE TABLE IF NOT EXIST `table_user`;
+(
+	`id_user`SMALLINT(6) CHECK(id_user <= 1000),
+	`user_name` VARCHAR(30),
+	`user_mail` VARCHAR(100),
+	`user_registration` DATE,
+	`user_admin`BOOLEAN,
+
+	PRIMARY KEY (`id_user`)
+
+);
+
+ALTER TABLE `table_user`
+ADD CONSTRAINT PK_name PRIMARY KEY(`id_user`, `user_name`);
+
+ALTER TABLE `table_user`
+DROP PRIMARY KEY;
+
+ALTER TABLE `table_user`
+DROP INDEX PK_name;
+
+
+
+------
+AUTO_INCREMENT
+
+--> incrementation 1 par 1
+
+CREATE TABLE IF NOT EXIST `table_user`;
+(
+	`id_user`SMALLINT(6) AUTO_INCREMENT,
+	`user_name` VARCHAR(30),
+	`user_mail` VARCHAR(100),
+	`user_registration` DATE,
+	`user_admin`BOOLEAN,
+
+	PRIMARY KEY (`id_user`)
+
+);
+
+ALTER TABLE `table_user` AUTO_INCREMENT = 100;
+
+----------
+
+FOREIGN KEY
+
+-->Créer la relation avec un autre table
+
+
+CREATE TABLE IF NOT EXIST `table_user`;
+(
+	`id_user`SMALLINT(6) AUTO_INCREMENT,
+	`user_name` VARCHAR(30),
+	`user_mail` VARCHAR(100),
+	`user_registration` DATE,
+	`user_admin`BOOLEAN,
+
+	PRIMARY KEY (`id_user`)
+
+);
+
+CREATE TABLE IF NOT EXIST `table_new`
+(
+	`id_new`, SMALLINT (6) NOT NULL AUTO_INCREMENT,
+	...
+	...
+	`id_auhtor` SMALLINT(6) NOT NULL,
+
+	PRIMARY KEY(`id_new`),
+	FOREIGN KEY(`id_auhtor`) REFERENCES `table_user`(`id_user)
+);
+
+
+ADD
+ALTER TABLE `table_new`
+ADD FOREIGN KEY (`id_auhtor`) REFERENCES `table_user`(`id_user); 
+
+ALTER TABLE `table_new`
+ADD CONSTRAINT FK_name FOREIGN KEY (`id_auhtor`) REFERENCES `table_user`(`id_user);
+
+--> les relations doivent être détruites avant de supprimez une table
+ALTER TABLE `table_new`
+DROP FOREIGN KEY `FK_name`;
+
+-------
+INDEX
+Index pour la lecture et recherche
+
+--> sur de tables existantes
+CREATE INDEX IDX_name ON `table_user`(`user_name`, `user_mail`);
+
+ALTER TABLE `table_user`
+DROP INDEX `IDX_name`;
+
