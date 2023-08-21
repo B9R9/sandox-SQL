@@ -1,12 +1,13 @@
 
 # Introduction
 
-+ [Statement](#statement-&-definition)
 + [Create Table](#create-table)
 + [Insertt](#insert)
 + [Select](#select)
 + [Alter Table](#alter-table)
 + [Update](#update)
++ [Delete](#delete)
++ [Constraint](#constraints)
 
 ***
 # Statement & Definition  
@@ -95,72 +96,24 @@ WHERE id = 4;
 [top](#introduction)  
 ***
 # Delete
-The DELETE FROM statement deletes one or more rows from a table. You can use the statement when you want to delete existing records. The statement below deletes all records in the celebs table with no twitter_handle:
-
-DELETE FROM celebs 
-WHERE twitter_handle IS NULL;
- 
-DELETE FROM is a clause that lets you delete rows from a table.
-celebs is the name of the table we want to delete rows from.
-WHERE is a clause that lets you select which rows you want to delete. Here we want to delete all of the rows where the twitter_handle column IS NULL.
-IS NULL is a condition in SQL that returns true when the value is NULL and false otherwise.
-
-Constraints
-Constraints that add information about how a column can be used are invoked after specifying the data type for a column. They can be used to tell the database to reject inserted data that does not adhere to a certain restriction. The statement below sets constraints on the celebs table.
-
-CREATE TABLE celebs (
+`DELETE FROM` statement deletes one or more rows from a table. You can use the statement when you want to delete existing records. The statement below deletes all records in the class table with no teacher:
+```
+DELETE FROM class 
+WHERE teacher IS NULL;
+```
+[top](#introduction)  
+# Constraints
+Constraints that add information about how a column can be used are invoked after specifying the data type for a column. They can be used to tell the database to reject inserted data that does not adhere to a certain restriction. The statement below sets constraints on the class table.
+```
+CREATE TABLE class (
    id INTEGER PRIMARY KEY, 
    name TEXT UNIQUE,
    date_of_birth TEXT NOT NULL,
-   date_of_death TEXT DEFAULT 'Not Applicable'
+   teacher TEXT DEFAULT 'Not Applicable'
 );
- 
-1. PRIMARY KEY columns can be used to uniquely identify the row. Attempts to insert a row with an identical value to a row already in the table will result in a constraint violation which will not allow you to insert the new row.
-
-2. UNIQUE columns have a different value for every row. This is similar to PRIMARY KEY except a table can have many different UNIQUE columns.
-
-3. NOT NULL columns must have a value. Attempts to insert a row without a value for a NOT NULL column will result in a constraint violation and the new row will not be inserted.
-
-4. DEFAULT columns take an additional argument that will be the assumed value for an inserted row if the new row does not specify a value for that column.
-
-
-
-----------------------------------------------------
-
-Create a Table
-In this project, you will create your own friends table and add/delete data from it!
-
-CREATE TABLE friends (
-  id INTEGER,
-  name TEXT,
-  birthday Date
-);
-
-INSERT INTO friends(id, name, birthday)
-VALUES (1,'Ororo Munroe', '1940-05-30');
-INSERT INTO friends(id, name, birthday)
-VALUES (2,'Joe Dassin', '1950-07-23');
-INSERT INTO friends(id, name, birthday)
-VALUES (3,'Bernard Tapis', '1998-12-25');
-
-UPDATE friends
-SET name = 'Storm' 
-WHERE id = 1; 
-
-ALTER TABLE friends 
-ADD COLUMN 'email' TEXT;
-
-UPDATE friends
-set email = 'storm@codecademy.com'
-WHERE id = 1;
-UPDATE friends
-set email = 'Joe@codecademy.com'
-WHERE id = 2;
-UPDATE friends
-set email = 'Bernard@codecademy.com'
-WHERE id = 3;
-
-DELETE FROM friends
-WHERE id = 1;
-
-SELECT * FROM friends;
+``` 
+`PRIMARY KEY` columns can be used to uniquely identify the row. Attempts to insert a row with an identical value to a row already in the table will result in a constraint violation which will not allow you to insert the new row.  
+`UNIQUE` columns have a different value for every row. This is similar to PRIMARY KEY except a table can have many different UNIQUE columns.  
+`NOT NULL` columns must have a value. Attempts to insert a row without a value for a NOT NULL column will result in a constraint violation and the new row will not be inserted.  
+`DEFAULT` columns take an additional argument that will be the assumed value for an inserted row if the new row does not specify a value for that column.  
+[top](#introduction)  
