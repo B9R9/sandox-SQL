@@ -1,0 +1,20 @@
+COMMANDE:
+
+	show databases 			-->	montre les databases
+	select user from mysql.user	-->	affiche le users de la databases sélectionner
+	select current_user()		-->	Affiche le current user
+
+	CREATE USER IF NOT EXISTS 'name'@'localhost' IDENTIFIED BY 'mode de passe';
+	ALTER USER 'name'@'localhost' IDENTIFIED BY 'new password'; --> recommender
+	SET PASSWORD FOR 'name'@'localhost' = 'new password';
+
+	RENAME USER <userinfo> TO <newuserinfo>;
+	DROP USER <userinfo>;
+
+	GRANT <PRIVILEGES(voir list)>	ON *.* TO <userinfo> // droit sur tous. 
+On peut ajuster les droits sur Tables, colonnes et databases
+	GRANT ALL ON cours_sql.* TO <userinfo>
+
+RETIRER DES PRIVILEGES:
+	REVOKE <privileges> ON <what> FROM <userinfo>
+
